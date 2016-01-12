@@ -2,7 +2,14 @@
 	"name": "blitzr/php-client",
     "type": "library",
     "license": "MIT",
+    "homepage": "http://api.blitzr.com/",
     "require": {
+    	"php": ">=5.5.0",
         "guzzlehttp/guzzle": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blitzr\\": "src/"
+        }
     }
 }
