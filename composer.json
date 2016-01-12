@@ -1,4 +1,6 @@
 {
+	"name": "blitzr/php-client",
+    "license": "MIT",
     "require": {
         "guzzlehttp/guzzle": "^6.1"
     }
