@@ -18,6 +18,6 @@ class BlitzrClient
 
 	function test()
 	{
-		return $apiKey;
+		return $this->apiKey;
 	}
 }
