@@ -25,7 +25,7 @@ class BlitzrClient
 		$url = $url . "?slug=eminem";
 		$url = $url . "&key=" . $this->apiKey;
 
-		$res = $client->request('GET', $url, [
+		$res = $this->client->request('GET', $url, [
 		    'headers' => [
 		    	'Accept' => 'application/json'
 		    ]
