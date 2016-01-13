@@ -34,7 +34,8 @@ class BlitzrClient
 			    'headers' => [
 			    	'Accept' => 'application/json'
 			    ],
-			    'query' => $params
+			    'query' => $params,
+			    'debug' => true
 			]);
 		} catch (ClientException $e) {
 			$err = json_decode($e->getResponse()->getBody()->getContents());
@@ -55,6 +56,10 @@ class BlitzrClient
 		return json_decode($json);
 	}
 
+	/***************************
+	**       Global API       **
+	***************************/
+
 	public function getTopArtists($start = 0, $limit = 10)
 	{
 		return $this->request('top/artists/', [
@@ -70,6 +75,10 @@ class BlitzrClient
 			'limit' => $limit
 		]);
 	}
+
+	/***************************
+	**       Artist API       **
+	***************************/
 
 	public function getArtist($slug = null, $uuid = null, $extras = [], $extras_limit = 2)
 	{
@@ -149,7 +158,7 @@ class BlitzrClient
 			'limit' => $limit,
 			'type' => $type,
 			'format' => $format,
-			'credited' => $credited
+			'credited' => $credited ? 'true' : 'false'
 		]);
 	}
 
@@ -178,4 +187,31 @@ class BlitzrClient
 			'uuid' => $uuid
 		]);
 	}
+
+	/***************************
+	**       Event API        **
+	***************************/
+
+	public function getEvent($slug = null, $uuid = null)
+	{
+		return $this->request('event/', [
+			'slug' => $slug,
+			'uuid' => $uuid
+		]);
+	}
+
+	public function getEvents($country_code = null, $latitude = false, $longitude = false, $date_start = null, $date_end = null, $radius = -1, $start = 0, $limit = 10)
+	{
+		return $this->request('events/', [
+			'country_code' => $country_code,
+			'latitude' => $latitude ? $latitude : 'false',
+			'longitude' => $longitude ? $longitude : 'false',
+			'date_start' => $date_start ? $date_start->format(\DateTime::ISO8601) : null,
+			'date_end' => $date_end ? $date_end->format(\DateTime::ISO8601) : null,
+			'raduis' => $radius,
+			'start' => $start,
+			'limit' => $limit
+		]);
+	}
+
 }
