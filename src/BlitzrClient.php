@@ -2,8 +2,8 @@
 
 namespace Blitzr;
 
-use Blitzr\Exception;
 use GuzzleHttp\Client;
+use Blitzr\Exception;
 
 class BlitzrClient
 {
@@ -13,13 +13,13 @@ class BlitzrClient
 	function __construct($apiKey)
 	{
 		if ($apiKey === null) {
-			throw new BlitzrConfigurationException('1 est un paramètre invalide', 5);
+			throw new BlitzrConfigurationException('You must provide an API key.', 0);
 		}
 		$this->apiKey = $apiKey;
-		$this->client = new GuzzleHttp\Client();
+		$this->client = new Client();
 	}
 
-	function test()
+	public function test()
 	{
 		return $this->apiKey;
 	}
