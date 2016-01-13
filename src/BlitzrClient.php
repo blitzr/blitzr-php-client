@@ -21,6 +21,18 @@ class BlitzrClient
 
 	public function test()
 	{
-		return $this->apiKey;
+		$url = 'https://api.blitzr.com/artist/';
+		$url = $url . "?slug=eminem";
+		$url = $url . "&key=" . $this->apiKey;
+
+		$res = $client->request('GET', $url, [
+		    'headers' => [
+		    	'Accept' => 'application/json'
+		    ]
+		]);
+
+		echo $res->getStatusCode();
+		echo $res->getHeaderLine('content-type');
+		echo $res->getBody();
 	}
 }
