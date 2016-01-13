@@ -3,7 +3,7 @@
 namespace Blitzr;
 
 use Blitzr\Exception;
-use GuzzleHttp\Client();
+use GuzzleHttp\Client;
 
 class BlitzrClient
 {
