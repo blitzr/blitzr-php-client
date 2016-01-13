@@ -3,7 +3,7 @@
 namespace Blitzr;
 
 use GuzzleHttp\Client;
-use Blitzr\Exception;
+use Blitzr\Exception\ConfigurationException;
 
 class BlitzrClient
 {
@@ -13,7 +13,7 @@ class BlitzrClient
 	function __construct($apiKey)
 	{
 		if ($apiKey === null) {
-			throw new BlitzrConfigurationException('You must provide an API key.', 0);
+			throw new ConfigurationException('You must provide an API key.', 0);
 		}
 		$this->apiKey = $apiKey;
 		$this->client = new Client();
