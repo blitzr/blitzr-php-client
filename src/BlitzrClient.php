@@ -5,7 +5,7 @@ namespace Blitzr;
 use Blitzr\Exception;
 use GuzzleHttp\Client;
 
-class Client
+class BlitzrClient
 {
 	private $apiKey;
 	private $client;
