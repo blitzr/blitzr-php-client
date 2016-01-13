@@ -8,7 +8,6 @@
         "guzzlehttp/guzzle": "^6.1"
     },
     "autoload": {
-    	"files": ["src/functions_include.php"],
         "psr-4": {
             "Blitzr\\": "src/"
         }

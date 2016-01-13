@@ -5,6 +5,8 @@ namespace Blitzr;
 use Blitzr\Exception;
 use GuzzleHttp\Client;
 
+require 'vendor/autoload.php';
+
 class BlitzrClient
 {
 	private $apiKey;
