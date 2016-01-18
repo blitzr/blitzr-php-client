@@ -105,46 +105,6 @@ class BlitzrClient
     }
 
     /***************************
-    **       Global API       **
-    ***************************/
-
-    /**
-    * Get the Blitzr Top Artists.
-    *
-    * Get the Blitzr Top Artists, you can paginate by setting $start and $limit parameters.
-    *
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return array
-    */
-    public function getTopArtists($start = null, $limit = null)
-    {
-        return $this->request('top/artists/', [
-            'start' => $start,
-            'limit' => $limit
-        ]);
-    }
-
-    /**
-    * Get the Blitzr Top Listens.
-    *
-    * Get the Blitzr Top Listens, you can paginate by setting $start and $limit parameters.
-    *
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return array
-    */
-    public function getTopListens($start = null, $limit = null)
-    {
-        return $this->request('top/listens/', [
-            'start' => $start,
-            'limit' => $limit
-        ]);
-    }
-
-    /***************************
     **       Artist API       **
     ***************************/
 
@@ -763,59 +723,6 @@ class BlitzrClient
     }
 
     /**
-    * Search City.
-    *
-    * Search city.
-    * Use $query parameter to search the city.
-    * The $autocomplete parameter allow you to find city with predictive algorithm.
-    * You can paginate by setting $start and $limit parameters.
-    * If you set a longitude, latitude couple, the API will retrieve the nearest cities.
-    *
-    * @param string $query Search query
-    * @param boolean $autocomplete Enable predictive search
-    * @param float $latitude Latitude of a point
-    * @param float $longitude Longitude of a point
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    * @param boolean extras Get extra info like number of results
-    *
-    * @return object
-    */
-    public function searchCity($query = null, $autocomplete = false, $latitude = null, $longitude = null, $start = null, $limit = null)
-    {
-        return $this->request('search/city/', [
-            'query'         => $query,
-            'autocomplete'  => $autocomplete ? 'true' : 'false',
-            'latitude'      => $latitude,
-            'longitude'     => $longitude,
-            'start'         => $start,
-            'limit'         => $limit
-        ]);
-    }
-
-    /**
-    * Search Country.
-    *
-    * Search country.
-    * Use $country_code parameter to get the country.
-    * You can paginate by setting $start and $limit parameters.
-    *
-    * @param string $country_code Country code (us, fr, ...)
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return object
-    */
-    public function searchCountry($country_code = null, $start = null, $limit = null)
-    {
-        return $this->request('search/country/', [
-            'country_code'  => $country_code,
-            'start'         => $start,
-            'limit'         => $limit
-        ]);
-    }
-
-    /**
     * Search Label.
     *
     * Search label.
@@ -1068,24 +975,6 @@ class BlitzrClient
     }
 
     /**
-    * Get the Blitzr currently listen tracks.
-    *
-    * Get the Blitzr currently listen tracks, you can paginate by setting $start and $limit parameters
-    *
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return array
-    */
-    public function getTrackCurrentlyListens($start = null, $limit = null)
-    {
-        return $this->request('track/currently_listened/', [
-            'start' => $start,
-            'limit' => $limit
-        ]);
-    }
-
-    /**
     * Get all sources for a track.
     *
     * Get all sources for a track.
@@ -1098,26 +987,6 @@ class BlitzrClient
     {
         return $this->request('track/sources/', [
             'uuid' => $uuid
-        ]);
-    }
-
-    /***************************
-    **      Playlist API      **
-    ***************************/
-
-    /**
-    * Get a playlist.
-    *
-    * Get a playlist by id
-    *
-    * @param string $id Blitzr id of the playlist
-    *
-    * @return object
-    */
-    public function getPlaylist($id = null)
-    {
-        return $this->request('playlist/', [
-            'id' => $id
         ]);
     }
 }
