@@ -24,7 +24,18 @@ use GuzzleHttp\Exception\ServerException;
  */
 class BlitzrClient
 {
+    /**
+    * Blitzr API Key
+    *
+    * You can request an API Key and get all the documentation on developer.blitzr.com
+    */
     private $apiKey;
+
+    /**
+    * Guzzle Client
+    *
+    * BlitzrClient id powered by Guzzle : https://github.com/guzzle/guzzle
+    */
     private $client;
 
     const API_BASE_URL = 'https://api.blitzr.com/';
@@ -902,6 +913,7 @@ class BlitzrClient
     * You must set the $product_type parameter. (cd|lp|mp3|merch)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
+    * @param string $product_type Type of shop product
     * @param string $slug Blitzr slug of the artist
     * @param string $uuid Blitzr uuid of the artist
     *
@@ -922,6 +934,7 @@ class BlitzrClient
     * You must set the $product_type parameter. (cd|lp|merch)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
+    * @param string $product_type Type of shop product
     * @param string $slug Blitzr slug of the label
     * @param string $uuid Blitzr uuid of the label
     *
@@ -942,6 +955,7 @@ class BlitzrClient
     * You must set the $product_type parameter. (cd|lp|mp3)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
+    * @param string $product_type Type of shop product
     * @param string $slug Blitzr slug of the release
     * @param string $uuid Blitzr uuid of the release
     *
