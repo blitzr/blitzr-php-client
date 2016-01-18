@@ -413,6 +413,26 @@ class BlitzrClient
         ]);
     }
 
+    /**
+    * Get events.
+    *
+    * Get events list.
+    * Use $country_code to filter by country.
+    * Use both dates params to filter by date.
+    * Use $longitude, $latitude and $radius params to filter by geolocation.
+    * You can paginate by setting $start and $limit parameters.
+    *
+    * @param string $country_code Country code where the event take place
+    * @param float $latitude Latitude of a point
+    * @param float $longitude Longitude of a point
+    * @param object $date_start DateTime object for when start the search
+    * @param object $date_start DateTime object for when end the search
+    * @param int $radius Max distance in km from the lat,lon point
+    * @param int $start Start from this parameter value, for pagination
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
     public function getEvents($country_code = null, $latitude = false, $longitude = false, $date_start = null, $date_end = null, $radius = null, $start = null, $limit = null)
     {
         return $this->request('events/', [
