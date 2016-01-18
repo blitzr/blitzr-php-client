@@ -15,11 +15,10 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Exception\ServerException;
 
-
 /**
  * BlitzrClient is the only client you need to access Blitzr API.
- * 
- * Just create an instance of BlitzrClient with your API key and 
+ *
+ * Just create an instance of BlitzrClient with your API key and
  * start enjoying Blitzr's Metadatas.
  */
 class BlitzrClient
@@ -49,7 +48,7 @@ class BlitzrClient
     *
     * @return null
     */
-    function __construct($apiKey)
+    public function __construct($apiKey)
     {
         if ($apiKey === null) {
             throw new ConfigurationException('You must provide an API key.', 0);
@@ -67,7 +66,7 @@ class BlitzrClient
     *
     * @param string $method Blitzr method to call (https://api.blitzr.com/*method*)
     *
-    * @param mixed[] $params Query parameters, this param is an associative array where 
+    * @param mixed[] $params Query parameters, this param is an associative array where
     * the key is the name of the corresponding query param and the value is the value of
     * the corresponding query param.
     *
@@ -816,7 +815,7 @@ class BlitzrClient
     /**
     * Get all shop items for an artist.
     *
-    * Get all shop items for an artist. 
+    * Get all shop items for an artist.
     * You must set the $product_type parameter. (cd|lp|mp3|merch)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
@@ -837,7 +836,7 @@ class BlitzrClient
     /**
     * Get all shop items for a label.
     *
-    * Get all shop items for a label. 
+    * Get all shop items for a label.
     * You must set the $product_type parameter. (cd|lp|merch)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
@@ -858,7 +857,7 @@ class BlitzrClient
     /**
     * Get all shop items for a release.
     *
-    * Get all shop items for a release. 
+    * Get all shop items for a release.
     * You must set the $product_type parameter. (cd|lp|mp3)
     * At least one of the $slug or $uuid parameters is mandatory.
     *
