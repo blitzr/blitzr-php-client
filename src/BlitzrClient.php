@@ -62,7 +62,7 @@ class BlitzrClient
     **       Global API       **
     ***************************/
 
-    public function getTopArtists($start = 0, $limit = 10)
+    public function getTopArtists($start = null, $limit = null)
     {
         return $this->request('top/artists/', [
             'start' => $start,
@@ -70,7 +70,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getTopListens($start = 0, $limit = 10)
+    public function getTopListens($start = null, $limit = null)
     {
         return $this->request('top/listens/', [
             'start' => $start,
@@ -82,7 +82,7 @@ class BlitzrClient
     **       Artist API       **
     ***************************/
 
-    public function getArtist($slug = null, $uuid = null, $extras = [], $extras_limit = 2)
+    public function getArtist($slug = null, $uuid = null, $extras = [], $extras_limit = null)
     {
         return $this->request('artist/', [
             'slug'          => $slug,
@@ -100,7 +100,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistBands($slug = null, $uuid = null, $start = 0, $limit = -1)
+    public function getArtistBands($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/aliases/', [
             'slug'  => $slug,
@@ -121,7 +121,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistEvents($slug = null, $uuid = null, $start = 0, $limit = 10)
+    public function getArtistEvents($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/events/', [
             'slug'  => $slug,
@@ -131,7 +131,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistMembers($slug = null, $uuid = null, $start = 0, $limit = -1)
+    public function getArtistMembers($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/members/', [
             'slug'  => $slug,
@@ -141,7 +141,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistRelated($slug = null, $uuid = null, $start = 0, $limit = -1)
+    public function getArtistRelated($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/related/', [
             'slug'  => $slug,
@@ -151,7 +151,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistReleases($slug = null, $uuid = null, $start = 0, $limit = 10, $type = null, $format = null, $credited = false)
+    public function getArtistReleases($slug = null, $uuid = null, $start = null, $limit = null, $type = null, $format = null, $credited = false)
     {
         return $this->request('artist/releases/', [
             'slug'      => $slug,
@@ -164,7 +164,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getArtistSimilars($slug = null, $uuid = null, $start = 0, $limit = 10)
+    public function getArtistSimilars($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/similars/', [
             'slug'  => $slug,
@@ -202,7 +202,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getEvents($country_code = null, $latitude = false, $longitude = false, $date_start = null, $date_end = null, $radius = -1, $start = 0, $limit = 10)
+    public function getEvents($country_code = null, $latitude = false, $longitude = false, $date_start = null, $date_end = null, $radius = null, $start = null, $limit = null)
     {
         return $this->request('events/', [
             'country_code'  => $country_code,
@@ -258,7 +258,7 @@ class BlitzrClient
     **        Label API       **
     ***************************/
 
-    public function getLabel($slug = null, $uuid = null, $extras = [], $extras_limit = 2)
+    public function getLabel($slug = null, $uuid = null, $extras = [], $extras_limit = null)
     {
         return $this->request('label/', [
             'slug'          => $slug,
@@ -268,7 +268,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getLabelArtists($slug = null, $uuid = null, $start = 0, $limit = 10)
+    public function getLabelArtists($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('label/artists/', [
             'slug'  => $slug,
@@ -288,7 +288,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getLabelReleases($slug = null, $uuid = null, $format = null, $start = 0, $limit = 10)
+    public function getLabelReleases($slug = null, $uuid = null, $format = null, $start = null, $limit = null)
     {
         return $this->request('label/releases/', [
             'slug'      => $slug,
@@ -299,7 +299,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getLabelSimilars($slug = null, $uuid = null, $start = 0, $limit = 10)
+    public function getLabelSimilars($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('label/similars/', [
             'slug'  => $slug,
@@ -341,7 +341,7 @@ class BlitzrClient
     **       Search API       **
     ***************************/
 
-    public function searchArtist($query = null, $autocomplete = false, $start = 0, $limit = 10, $extras = false)
+    public function searchArtist($query = null, $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/artist/', [
             'query'         => $query,
@@ -352,7 +352,7 @@ class BlitzrClient
         ]);
     }
 
-    public function searchCity($query = null, $autocomplete = false, $latitude = null, $longitude = null, $start = 0, $limit = 10)
+    public function searchCity($query = null, $autocomplete = false, $latitude = null, $longitude = null, $start = null, $limit = null)
     {
         return $this->request('search/city/', [
             'query'         => $query,
@@ -364,7 +364,7 @@ class BlitzrClient
         ]);
     }
 
-    public function searchCountry($country_code = null, $start = 0, $limit = 10)
+    public function searchCountry($country_code = null, $start = null, $limit = null)
     {
         return $this->request('search/country/', [
             'country_code'  => $country_code,
@@ -373,7 +373,7 @@ class BlitzrClient
         ]);
     }
 
-    public function searchLabel($query = null, $autocomplete = false, $start = 0, $limit = 10, $extras = false)
+    public function searchLabel($query = null, $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/label/', [
             'query'         => $query,
@@ -384,7 +384,7 @@ class BlitzrClient
         ]);
     }
 
-    public function searchRelease($query = null, $filters = [], $autocomplete = false, $start = 0, $limit = 10, $extras = false)
+    public function searchRelease($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/release/', [
             'query'         => $query,
@@ -396,7 +396,7 @@ class BlitzrClient
         ]);
     }
 
-    public function searchTrack($query = null, $filters = [], $autocomplete = false, $start = 0, $limit = 10, $extras = false)
+    public function searchTrack($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/track/', [
             'query'         => $query,
@@ -454,7 +454,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getTagArtists($slug = null, $start = 0, $limit = 10)
+    public function getTagArtists($slug = null, $start = null, $limit = null)
     {
         return $this->request('tag/artists/', [
             'slug'  => $slug,
@@ -463,7 +463,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getTagReleases($slug = null, $start = 0, $limit = 10)
+    public function getTagReleases($slug = null, $start = null, $limit = null)
     {
         return $this->request('tag/releases/', [
             'slug'  => $slug,
@@ -483,7 +483,7 @@ class BlitzrClient
         ]);
     }
 
-    public function getTrackCurrentlyListens($start = 0, $limit = 10)
+    public function getTrackCurrentlyListens($start = null, $limit = null)
     {
         return $this->request('track/currently_listened/', [
             'start' => $start,

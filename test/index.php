@@ -6,4 +6,4 @@ use Blitzr\BlitzrClient;
 
 $blitzr = new BlitzrClient('a5802057a696c5017645de719fbe8ef9');
 
-var_dump($blitzr->searchCountry('FR'));
+var_dump($blitzr->getTopArtists(5, 5));
