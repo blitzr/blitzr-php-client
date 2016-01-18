@@ -16,13 +16,15 @@ class BlitzrClient
     private $apiKey;
     private $client;
 
+    const API_BASE_URL = 'https://api.blitzr.com/';
+
     function __construct($apiKey)
     {
         if ($apiKey === null) {
             throw new ConfigurationException('You must provide an API key.', 0);
         }
         $this->apiKey = $apiKey;
-        $this->client = new Client(['base_uri' => 'https://api.blitzr.com/']);
+        $this->client = new Client(['base_uri' => self::API_BASE_URL]);
     }
 
     public function request($method, $params = [])
