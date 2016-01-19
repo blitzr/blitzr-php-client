@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MandatoryParamsException file.
+ * ClientException file.
  */
 
 namespace Blitzr\Exception;
@@ -9,12 +9,12 @@ namespace Blitzr\Exception;
 use Exception;
 
 /**
- * MandatoryParamsException, this exception is fired when the client did not provide all mandatory params.
+ * ClientException, this exception is fired when the client did not provide all mandatory params.
  */
-class MandatoryParamsException extends Exception
+class ClientException extends Exception
 {
     /**
-    * MandatoryParamsException constructor.
+    * ClientException constructor.
     *
     * Use this constructor to set the error message and code, eventually give a parent exception.
     *
@@ -30,7 +30,7 @@ class MandatoryParamsException extends Exception
     }
 
     /**
-    * MandatoryParamsException toString.
+    * ClientException toString.
     *
     * Return readable exception string
     *

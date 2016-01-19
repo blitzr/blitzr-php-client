@@ -8,8 +8,9 @@ namespace Blitzr;
 
 use GuzzleHttp\Client;
 use Blitzr\Exception\ConfigurationException;
-use Blitzr\Exception\MandatoryParamsException;
-use Blitzr\Exception\BlitzrException;
+use Blitzr\Exception\ClientException as BlitzrClientException;
+use Blitzr\Exception\ServerException as BlitzrServerException;
+use Blitzr\Exception\NetworkException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\TransferException;
@@ -86,16 +87,16 @@ class BlitzrClient
             ]);
         } catch (ClientException $e) {
             $err = json_decode($e->getResponse()->getBody()->getContents());
-            throw new MandatoryParamsException($err->message, $err->code);
+            throw new BlitzrClientException($err->message, $err->code);
         } catch (ConnectException $e) {
             $err = json_decode($e->getResponse()->getBody()->getContents());
-            throw new BlitzrException($err->message, $err->code);
+            throw new NetworkException($err->message, $err->code);
         } catch (TransferException $e) {
             $err = json_decode($e->getResponse()->getBody()->getContents());
-            throw new BlitzrException($err->message, $err->code);
+            throw new NetworkException($err->message, $err->code);
         } catch (ServerException $e) {
             $err = json_decode($e->getResponse()->getBody()->getContents());
-            throw new BlitzrException($err->message, $err->code);
+            throw new BlitzrServerException($err->message, $err->code);
         }
 
         $json = $res->getBody()->getContents();

@@ -6,4 +6,4 @@ use Blitzr\BlitzrClient;
 
 $blitzr = new BlitzrClient('a5802057a696c5017645de719fbe8ef9');
 
-var_dump($blitzr->getHarmoniaSearchBySource('youtube', 'vjW8wmF5VWc', ['deezer']));
+var_dump($blitzr->getHarmoniaSearchBySource('youtube'));

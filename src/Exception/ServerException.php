@@ -1,20 +1,20 @@
 <?php
 
 /**
- * BlitzrException file.
+ * ServerException file.
  */
 
-namespace Blitzr\Exception;
+namespace Server\Exception;
 
 use Exception;
 
 /**
- * BlitzrException, base exception.
+ * ServerException, base exception.
  */
-class BlitzrException extends Exception
+class ServerException extends Exception
 {
     /**
-    * BlitzrException constructor.
+    * ServerException constructor.
     *
     * Use this constructor to set the error message and code, eventually give a parent exception.
     *
@@ -30,7 +30,7 @@ class BlitzrException extends Exception
     }
 
     /**
-    * BlitzrException toString.
+    * ServerException toString.
     *
     * Return readable exception string
     *
