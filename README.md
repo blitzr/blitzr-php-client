@@ -13,7 +13,7 @@ First step, create/upgrade your composer.json :
         "repositories": [
             {
                 "type": "git",
-                "url": "git@github.com:Blitzr/blitzr-php-client.git"
+                "url": "git@github.com:blitzr/blitzr-php-client.git"
             }
         ],
         "require": {
