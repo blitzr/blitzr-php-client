@@ -1,0 +1,22 @@
+{
+	"name": "blitzr/php-client",
+    "description" : "The official Blitzr API Client for PHP",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "http://api.blitzr.com/",
+    "authors" : [{
+        "name" : "Blitzr",
+        "email" : "contact@blitzr.com"
+    }],
+    "require": {
+    	"php": ">=5.5.0",
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Blitzr\\": "src/"
+        }
+    }
+}
