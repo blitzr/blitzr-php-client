@@ -5,7 +5,7 @@ Just integrate it to your project with *composer* and enjoy.
 
 To use this client you will need an API key, you can request it at : [api.blitzr.com](https://api.blitzr.com).
 
-## Installation
+## Getting started
 
 First step, create/upgrade your composer.json :
 
@@ -28,7 +28,7 @@ And install/update your project :
     // Or update
     $ composer update
 
-Then just require teh composer autoloader in your PHP file and use the client :
+Then just require the composer autoloader in your PHP file and use the client :
 
     // index.php
     <?php 
