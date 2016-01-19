@@ -82,8 +82,7 @@ class BlitzrClient
                 'headers' => [
                     'Accept' => 'application/json'
                 ],
-                'query' => $params,
-                'debug' => true
+                'query' => $params
             ]);
         } catch (ClientException $e) {
             $err = json_decode($e->getResponse()->getBody()->getContents());
