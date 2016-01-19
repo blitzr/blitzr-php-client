@@ -17,7 +17,7 @@ First step, create/upgrade your composer.json :
             }
         ],
         "require": {
-            "blitzr/php-client": "dev-develop"
+            "blitzr/php-client": "dev-master"
         }
     }
 
