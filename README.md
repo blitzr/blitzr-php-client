@@ -29,3 +29,7 @@ Then just require the composer autoloader in your PHP file and use the client :
     $artist = $blitzr->getArtist('year-of-no-light');
 
 That's all !
+
+## Documentation
+
+You can find the documentation [here](doc/).
