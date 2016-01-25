@@ -13,6 +13,8 @@
         "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
+        "phpdocumentor/phpdocumentor" : "2.*",
+        "evert/phpdoc-md" : "~0.1.1"
     },
     "autoload": {
         "psr-4": {
