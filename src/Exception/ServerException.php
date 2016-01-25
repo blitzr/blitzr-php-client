@@ -4,7 +4,7 @@
  * ServerException file.
  */
 
-namespace Server\Exception;
+namespace Blitzr\Exception;
 
 use Exception;
 
