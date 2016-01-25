@@ -7,26 +7,9 @@ To use this client you will need an API key, you can request it at : [api.blitzr
 
 ## Getting started
 
-First step, create/upgrade your composer.json :
+First step, require blitzr-php-client with composer :
 
-    {
-        "repositories": [
-            {
-                "type": "git",
-                "url": "git@github.com:blitzr/blitzr-php-client.git"
-            }
-        ],
-        "require": {
-            "blitzr/php-client": "dev-master"
-        }
-    }
-
-And install/update your project :
-
-    // Install
-    $ composer install
-    // Or update
-    $ composer update
+    $ composer require blitzr/php-client
 
 Then just require the composer autoloader in your PHP file and use the client :
 
