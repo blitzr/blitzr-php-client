@@ -304,7 +304,7 @@ class BlitzrClient
     /**
     * Get artist's similar artists.
     *
-    * Get artist similars from a given artist.
+    * Get artist similar from a given artist.
     * At least one of the $slug or $uuid parameters is mandatory.
     * You can paginate by setting $start and $limit parameters.
     *
@@ -315,7 +315,7 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getArtistSimilars($slug = null, $uuid = null, $start = null, $limit = null)
+    public function getArtistSimilar($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/similars/', [
             'slug'  => $slug,
@@ -403,12 +403,15 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getEvents($country_code = null, $latitude = false, $longitude = false, $date_start = null, $date_end = null, $radius = null, $start = null, $limit = null)
+    public function getEvents($country_code = null, $latitude = false, $longitude = false, $city = null, $venue = null, $tag = null, $date_start = null, $date_end = null, $radius = null, $start = null, $limit = null)
     {
         return $this->request('events/', [
             'country_code'  => $country_code,
             'latitude'      => $latitude ? $latitude : 'false',
             'longitude'     => $longitude ? $longitude : 'false',
+            'city'          => $city,
+            'venue'         => $venue,
+            'tag'           => $tag,
             'date_start'    => $date_start ? $date_start->format(\DateTime::ISO8601) : null,
             'date_end'      => $date_end ? $date_end->format(\DateTime::ISO8601) : null,
             'raduis'        => $radius,
@@ -609,9 +612,9 @@ class BlitzrClient
     }
 
     /**
-    * Get label's similars.
+    * Get label's similar.
     *
-    * Get the similars labels of a given label.
+    * Get the similar labels of a given label.
     * At least one of the $slug or $uuid parameters is mandatory.
     * You can paginate by setting $start and $limit parameters.
     *
@@ -622,7 +625,7 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getLabelSimilars($slug = null, $uuid = null, $start = null, $limit = null)
+    public function getLabelSimilar($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('label/similars/', [
             'slug'  => $slug,
@@ -710,10 +713,11 @@ class BlitzrClient
     *
     * @return object
     */
-    public function searchArtist($query = null, $autocomplete = false, $start = null, $limit = null, $extras = false)
+    public function searchArtist($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/artist/', [
             'query'         => $query,
+            'filters'       => implode(',', $filters),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
@@ -737,10 +741,11 @@ class BlitzrClient
     *
     * @return object
     */
-    public function searchLabel($query = null, $autocomplete = false, $start = null, $limit = null, $extras = false)
+    public function searchLabel($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/label/', [
             'query'         => $query,
+            'filters'       => implode(',', $filters),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
@@ -789,7 +794,6 @@ class BlitzrClient
     *
     * @param string $query Search query
     * @param string[] $filters Filter results. Available filters : artist, release, format_summary
-    * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     * @param boolean extras Get extra info like number of results
@@ -801,10 +805,60 @@ class BlitzrClient
         return $this->request('search/track/', [
             'query'         => $query,
             'filters'       => implode(',', $filters),
-            'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
             'extras'        => $extras ? 'true' : 'false'
+        ]);
+    }
+
+    /**
+    * Search City.
+    *
+    * Search city.
+    * Use $query parameter to search the city.
+    * The $autocomplete parameter allow you to find city with predictive algorithm.
+    * You can paginate by setting $start and $limit parameters.
+    *
+    * @param string $query Search query
+    * @param boolean $autocomplete Enable predictive search
+    * @param float $latitude Geolocation of the city : latitude
+    * @param float $longitude Geolocation of the city : longitude
+    * @param int $start Start from this parameter value, for pagination
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return object
+    */
+    public function searchCity($query = null, $autocomplete = false, $latitude = null, $longitude = null, $start = null, $limit = null)
+    {
+        return $this->request('search/city/', [
+            'query'         => $query,
+            'autocomplete'  => $autocomplete ? 'true' : 'false',
+            'latitude'      => $latitude,
+            'longitude'     => $longitude,
+            'start'         => $start,
+            'limit'         => $limit,
+        ]);
+    }
+
+    /**
+    * Search Country.
+    *
+    * Search country.
+    * Use $query parameter to search the country.
+    * You can paginate by setting $start and $limit parameters.
+    *
+    * @param string $country_code Official country country code
+    * @param int $start Start from this parameter value, for pagination
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return object
+    */
+    public function searchCountry($country_code = null, $start = null, $limit = null)
+    {
+        return $this->request('search/country/', [
+            'country_code'  => $country_code,
+            'start'         => $start,
+            'limit'         => $limit,
         ]);
     }
 
