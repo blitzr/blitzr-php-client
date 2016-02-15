@@ -3,7 +3,7 @@
 This client makes it easy to deal with Blitzr API.
 Just integrate it to your project with *composer* and enjoy.
 
-To use this client you will need an API key, you can request it at : [developer.blitzr.com](https://developer.blitzr.com).
+To use this client you will need an API key, you can request it at : [developer.blitzr.com](http://developer.blitzr.com).
 
 ## Getting started
 
