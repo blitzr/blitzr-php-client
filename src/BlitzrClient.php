@@ -395,8 +395,11 @@ class BlitzrClient
     * @param string $country_code Country code where the event take place
     * @param float $latitude Latitude of a point
     * @param float $longitude Longitude of a point
-    * @param object $date_start DateTime object for when start the search
-    * @param object $date_start DateTime object for when end the search
+    * @param string $city City code where the event take place (not compatible with $county_code)
+    * @param string $venue Venue code where the event take place
+    * @param string $tag Filter events by tag
+    * @param \DateTime $date_start DateTime object for when start the search
+    * @param \DateTime $date_start DateTime object for when end the search
     * @param int $radius Max distance in km from the lat,lon point
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
@@ -706,6 +709,7 @@ class BlitzrClient
     * You can paginate by setting $start and $limit parameters.
     *
     * @param string $query Search query
+    * @param string[] $filters Filter results. Available filters : location, tag, type
     * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
@@ -734,6 +738,7 @@ class BlitzrClient
     * You can paginate by setting $start and $limit parameters.
     *
     * @param string $query Search query
+    * @param string[] $filters Filter results. Available filters : location, tag
     * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
@@ -763,7 +768,7 @@ class BlitzrClient
     * You can also enable some filters by the param $filters
     *
     * @param string $query Search query
-    * @param string[] $filters Filter results. Available filters : artist, format_summary
+    * @param string[] $filters Filter results. Available filters : artist, tag, format_summary, year, location
     * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
@@ -793,14 +798,14 @@ class BlitzrClient
     * You can also enable some filters by the param $filters
     *
     * @param string $query Search query
-    * @param string[] $filters Filter results. Available filters : artist, release, format_summary
+    * @param string[] $filters Filter results. Available filters : artist, release, format_summary, year, location
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     * @param boolean extras Get extra info like number of results
     *
     * @return object
     */
-    public function searchTrack($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
+    public function searchTrack($query = null, $filters = [], $start = null, $limit = null, $extras = false)
     {
         return $this->request('search/track/', [
             'query'         => $query,

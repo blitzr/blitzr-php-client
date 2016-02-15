@@ -13,7 +13,7 @@
     * [getArtistMembers](#getartistmembers)
     * [getArtistRelated](#getartistrelated)
     * [getArtistReleases](#getartistreleases)
-    * [getArtistSimilars](#getartistsimilars)
+    * [getArtistSimilar](#getartistsimilar)
     * [getArtistSummary](#getartistsummary)
     * [getArtistWebsites](#getartistwebsites)
     * [getEvent](#getevent)
@@ -26,7 +26,7 @@
     * [getLabelArtists](#getlabelartists)
     * [getLabelBiography](#getlabelbiography)
     * [getLabelReleases](#getlabelreleases)
-    * [getLabelSimilars](#getlabelsimilars)
+    * [getLabelSimilar](#getlabelsimilar)
     * [getLabelWebsites](#getlabelwebsites)
     * [getRelease](#getrelease)
     * [getReleaseSources](#getreleasesources)
@@ -34,6 +34,8 @@
     * [searchLabel](#searchlabel)
     * [searchRelease](#searchrelease)
     * [searchTrack](#searchtrack)
+    * [searchCity](#searchcity)
+    * [searchCountry](#searchcountry)
     * [getShopArtist](#getshopartist)
     * [getShopLabel](#getshoplabel)
     * [getShopRelease](#getshoprelease)
@@ -342,15 +344,15 @@ You can filter by release format with the $format parameter.
 ---
 
 
-### getArtistSimilars
+### getArtistSimilar
 
 Get artist's similar artists.
 
 ```php
-BlitzrClient::getArtistSimilars( string $slug = null, string $uuid = null, integer $start = null, integer $limit = null ): array
+BlitzrClient::getArtistSimilar( string $slug = null, string $uuid = null, integer $start = null, integer $limit = null ): array
 ```
 
-Get artist similars from a given artist.
+Get artist similar from a given artist.
 At least one of the $slug or $uuid parameters is mandatory.
 You can paginate by setting $start and $limit parameters.
 
@@ -447,7 +449,7 @@ Get an event by slug or uuid. At least one of the $slug or $uuid parameters is m
 Get events.
 
 ```php
-BlitzrClient::getEvents( string $country_code = null, float $latitude = false, float $longitude = false, object $date_start = null,  $date_end = null, integer $radius = null, integer $start = null, integer $limit = null ): array
+BlitzrClient::getEvents( string $country_code = null, float $latitude = false, float $longitude = false, string $city = null, string $venue = null, string $tag = null, \DateTime $date_start = null,  $date_end = null, integer $radius = null, integer $start = null, integer $limit = null ): array
 ```
 
 Get events list.
@@ -464,7 +466,10 @@ You can paginate by setting $start and $limit parameters.
 | `$country_code` | **string** | Country code where the event take place |
 | `$latitude` | **float** | Latitude of a point |
 | `$longitude` | **float** | Longitude of a point |
-| `$date_start` | **object** | DateTime object for when end the search |
+| `$city` | **string** | City code where the event take place (not compatible with $county_code) |
+| `$venue` | **string** | Venue code where the event take place |
+| `$tag` | **string** | Filter events by tag |
+| `$date_start` | **\DateTime** | DateTime object for when end the search |
 | `$date_end` | **** |  |
 | `$radius` | **integer** | Max distance in km from the lat,lon point |
 | `$start` | **integer** | Start from this parameter value, for pagination |
@@ -696,15 +701,15 @@ You can paginate by setting $start and $limit parameters.
 ---
 
 
-### getLabelSimilars
+### getLabelSimilar
 
-Get label's similars.
+Get label's similar.
 
 ```php
-BlitzrClient::getLabelSimilars( string $slug = null, string $uuid = null, integer $start = null, integer $limit = null ): array
+BlitzrClient::getLabelSimilar( string $slug = null, string $uuid = null, integer $start = null, integer $limit = null ): array
 ```
 
-Get the similars labels of a given label.
+Get the similar labels of a given label.
 At least one of the $slug or $uuid parameters is mandatory.
 You can paginate by setting $start and $limit parameters.
 
@@ -801,7 +806,7 @@ Get all release's sources. At least one of the $slug or $uuid parameters is mand
 Search Artist.
 
 ```php
-BlitzrClient::searchArtist( string $query = null, boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
+BlitzrClient::searchArtist( string $query = null, array&lt;mixed,string&gt; $filters = array(), boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
 ```
 
 Search artist.
@@ -815,6 +820,7 @@ You can paginate by setting $start and $limit parameters.
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$query` | **string** | Search query |
+| `$filters` | **array<mixed,string>** | Filter results. Available filters : location, tag, type |
 | `$autocomplete` | **boolean** | Enable predictive search |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
@@ -831,7 +837,7 @@ You can paginate by setting $start and $limit parameters.
 Search Label.
 
 ```php
-BlitzrClient::searchLabel( string $query = null, boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
+BlitzrClient::searchLabel( string $query = null, array&lt;mixed,string&gt; $filters = array(), boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
 ```
 
 Search label.
@@ -845,6 +851,7 @@ You can paginate by setting $start and $limit parameters.
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$query` | **string** | Search query |
+| `$filters` | **array<mixed,string>** | Filter results. Available filters : location, tag |
 | `$autocomplete` | **boolean** | Enable predictive search |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
@@ -876,7 +883,7 @@ You can also enable some filters by the param $filters
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$query` | **string** | Search query |
-| `$filters` | **array<mixed,string>** | Filter results. Available filters : artist, format_summary |
+| `$filters` | **array<mixed,string>** | Filter results. Available filters : artist, tag, format_summary, year, location |
 | `$autocomplete` | **boolean** | Enable predictive search |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
@@ -893,7 +900,7 @@ You can also enable some filters by the param $filters
 Search Track.
 
 ```php
-BlitzrClient::searchTrack( string $query = null, array&lt;mixed,string&gt; $filters = array(), boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
+BlitzrClient::searchTrack( string $query = null, array&lt;mixed,string&gt; $filters = array(), integer $start = null, integer $limit = null,  $extras = false ): object
 ```
 
 Search track.
@@ -908,11 +915,68 @@ You can also enable some filters by the param $filters
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$query` | **string** | Search query |
-| `$filters` | **array<mixed,string>** | Filter results. Available filters : artist, release, format_summary |
-| `$autocomplete` | **boolean** | Enable predictive search |
+| `$filters` | **array<mixed,string>** | Filter results. Available filters : artist, release, format_summary, year, location |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
 | `$extras` | **** |  |
+
+
+
+
+---
+
+
+### searchCity
+
+Search City.
+
+```php
+BlitzrClient::searchCity( string $query = null, boolean $autocomplete = false, float $latitude = null, float $longitude = null, integer $start = null, integer $limit = null ): object
+```
+
+Search city.
+Use $query parameter to search the city.
+The $autocomplete parameter allow you to find city with predictive algorithm.
+You can paginate by setting $start and $limit parameters.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** | Search query |
+| `$autocomplete` | **boolean** | Enable predictive search |
+| `$latitude` | **float** | Geolocation of the city : latitude |
+| `$longitude` | **float** | Geolocation of the city : longitude |
+| `$start` | **integer** | Start from this parameter value, for pagination |
+| `$limit` | **integer** | Limit the number of results, for pagination |
+
+
+
+
+---
+
+
+### searchCountry
+
+Search Country.
+
+```php
+BlitzrClient::searchCountry( string $country_code = null, integer $start = null, integer $limit = null ): object
+```
+
+Search country.
+Use $query parameter to search the country.
+You can paginate by setting $start and $limit parameters.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$country_code` | **string** | Official country country code |
+| `$start` | **integer** | Start from this parameter value, for pagination |
+| `$limit` | **integer** | Limit the number of results, for pagination |
 
 
 
@@ -1355,4 +1419,4 @@ Return readable exception string
 
 
 --------
-> This document was automatically generated from source code comments on 2016-01-25 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2016-02-15 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
