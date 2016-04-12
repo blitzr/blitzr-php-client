@@ -316,12 +316,12 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getArtistSimilar($slug = null, $uuid = null, $start = null, $limit = null)
+    public function getArtistSimilar($slug = null, $uuid = null, $filters = null, $start = null, $limit = null)
     {
         return $this->request('artist/similars/', [
             'slug'    => $slug,
             'uuid'    => $uuid,
-            'filters' => $filters
+            'filters' => $filters,
             'start'   => $start,
             'limit'   => $limit
         ]);
