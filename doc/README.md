@@ -455,7 +455,7 @@ Get an event by slug or uuid. At least one of the $slug or $uuid parameters is m
 Get events.
 
 ```php
-BlitzrClient::getEvents( string $country_code = null, float $latitude = false, float $longitude = false, string $city = null, string $venue = null, string $tag = null, \DateTime $date_start = null,  $date_end = null, integer $radius = null, integer $start = null, integer $limit = null ): array
+BlitzrClient::getEvents( string $country_code = null, float $latitude = false, float $longitude = false, string $city = null, string $venue = null, string $tag = null, \DateTime $date_start = null, \DateTime $date_end = null, integer $radius = null, integer $start = null, integer $limit = null ): array
 ```
 
 Get events list.
@@ -475,8 +475,8 @@ You can paginate by setting $start and $limit parameters.
 | `$city` | **string** | City code where the event take place (not compatible with $county_code) |
 | `$venue` | **string** | Venue code where the event take place |
 | `$tag` | **string** | Filter events by tag |
-| `$date_start` | **\DateTime** | DateTime object for when end the search |
-| `$date_end` | **** |  |
+| `$date_start` | **\DateTime** | DateTime object for when start the search |
+| `$date_end` | **\DateTime** | DateTime object for when end the search |
 | `$radius` | **integer** | Max distance in km from the lat,lon point |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |

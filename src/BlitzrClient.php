@@ -401,7 +401,7 @@ class BlitzrClient
     * @param string $venue Venue code where the event take place
     * @param string $tag Filter events by tag
     * @param \DateTime $date_start DateTime object for when start the search
-    * @param \DateTime $date_start DateTime object for when end the search
+    * @param \DateTime $date_end DateTime object for when end the search
     * @param int $radius Max distance in km from the lat,lon point
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
