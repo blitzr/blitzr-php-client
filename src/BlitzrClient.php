@@ -117,8 +117,8 @@ class BlitzrClient
     *
     * @param string $slug Blitzr slug of the artist
     * @param string $uuid Blitzr uuid of the artist
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
+    * @param array $extras Artist extras : aliases, websites, biography, last_releases, next_events, relations
+    * @param int $extras_limit Limit for iterable extras : last_releases, next_events (max is 10)
     *
     * @return object
     */
@@ -310,6 +310,7 @@ class BlitzrClient
     *
     * @param string $slug Blitzr slug of the artist
     * @param string $uuid Blitzr uuid of the artist
+    * @param array $filters Filter results. Available filters : location
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     *
@@ -318,10 +319,11 @@ class BlitzrClient
     public function getArtistSimilar($slug = null, $uuid = null, $start = null, $limit = null)
     {
         return $this->request('artist/similars/', [
-            'slug'  => $slug,
-            'uuid'  => $uuid,
-            'start' => $start,
-            'limit' => $limit
+            'slug'    => $slug,
+            'uuid'    => $uuid,
+            'filters' => $filters
+            'start'   => $start,
+            'limit'   => $limit
         ]);
     }
 
@@ -526,8 +528,8 @@ class BlitzrClient
     *
     * @param string $slug Blitzr slug of the label
     * @param string $uuid Blitzr uuid of the label
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
+    * @param array $extras Label extras : biography, websites, artists, last_releases, relations
+    * @param int $extras_limit Limit for iterable extras : last_releases, artists (max is 10)
     *
     * @return object
     */
@@ -551,16 +553,19 @@ class BlitzrClient
     * @param string $uuid Blitzr uuid of the label
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
+    * @param string $order Order results by name or date of last release (must be 'name' or 'releaseDate'
+    *        default is date) 
     *
     * @return array
     */
-    public function getLabelArtists($slug = null, $uuid = null, $start = null, $limit = null)
+    public function getLabelArtists($slug = null, $uuid = null, $start = null, $limit = null, $order = null)
     {
         return $this->request('label/artists/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
-            'limit' => $limit
+            'limit' => $limit,
+            'order' => $order
         ]);
     }
 
@@ -623,18 +628,20 @@ class BlitzrClient
     *
     * @param string $slug Blitzr slug of the label
     * @param string $uuid Blitzr uuid of the label
+    * @param array $filters Filter results. Available filters : location
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     *
     * @return array
     */
-    public function getLabelSimilar($slug = null, $uuid = null, $start = null, $limit = null)
+    public function getLabelSimilar($slug = null, $uuid = null, $filters = null, $start = null, $limit = null)
     {
         return $this->request('label/similars/', [
-            'slug'  => $slug,
-            'uuid'  => $uuid,
-            'start' => $start,
-            'limit' => $limit
+            'slug'    => $slug,
+            'uuid'    => $uuid,
+            'filters' => $filters,
+            'start'   => $start,
+            'limit'   => $limit
         ]);
     }
 
@@ -653,6 +660,108 @@ class BlitzrClient
         return $this->request('label/websites/', [
             'slug' => $slug,
             'uuid' => $uuid
+        ]);
+    }
+
+    /***************************
+    **        Radio API       **
+    ***************************/
+
+    /**
+    * Get an Artist's radio.
+    *
+    * Get a list of tracks from his last or famous releases. At least one of the $slug or $uuid parameters is mandatory.
+    *
+    * @param string $slug Blitzr slug of the artist
+    * @param string $uuid Blitzr uuid of the artist
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
+    public function getRadioArtist($slug = null, $uuid = null, $limit = null)
+    {
+        return $this->request('radio/artist/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid,
+            'limit' => $limit
+        ]);
+    }
+
+    /**
+    * Get an Artist's similar radio.
+    *
+    * Get a list of tracks from the last or famous releases of the given artist similar. At least one of the $slug or $uuid parameters is mandatory.
+    *
+    * @param string $slug Blitzr slug of the artist
+    * @param string $uuid Blitzr uuid of the artist
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
+    public function getRadioArtistSimilar($slug = null, $uuid = null, $limit = null)
+    {
+        return $this->request('radio/artist/similar/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid,
+            'limit' => $limit
+        ]);
+    }
+
+    /**
+    * Get an Event's radio.
+    *
+    * Get a list of tracks from the last or famous releases of the event's artists. At least one of the $slug or $uuid parameters is mandatory.
+    *
+    * @param string $slug Blitzr slug of the event
+    * @param string $uuid Blitzr uuid of the event
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
+    public function getRadioEvent($slug = null, $uuid = null, $limit = null)
+    {
+        return $this->request('radio/event/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid,
+            'limit' => $limit
+        ]);
+    }
+
+    /**
+    * Get an Label's radio.
+    *
+    * Get a list of tracks from the last or famous releases of the label's artists. At least one of the $slug or $uuid parameters is mandatory.
+    *
+    * @param string $slug Blitzr slug of the label
+    * @param string $uuid Blitzr uuid of the label
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
+    public function getRadioLabel($slug = null, $uuid = null, $limit = null)
+    {
+        return $this->request('radio/label/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid,
+            'limit' => $limit
+        ]);
+    }
+
+    /**
+    * Get an Tag's radio.
+    *
+    * Get a list of tracks from the last or famous releases of the tag's artists. At least one of the $slug or $uuid parameters is mandatory.
+    *
+    * @param string $slug Blitzr slug of the tag
+    * @param int $limit Limit the number of results, for pagination
+    *
+    * @return array
+    */
+    public function getRadioTag($slug = null, $limit = null)
+    {
+        return $this->request('radio/tag/', [
+            'slug'  => $slug,
+            'limit' => $limit
         ]);
     }
 
@@ -768,7 +877,7 @@ class BlitzrClient
     * You can also enable some filters by the param $filters
     *
     * @param string $query Search query
-    * @param string[] $filters Filter results. Available filters : artist, tag, format_summary, year, location
+    * @param string[] $filters Filter results. Available filters : artist, artist.uuid, tag, format_summary, year, location, label, label.uuid
     * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
