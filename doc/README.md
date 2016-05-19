@@ -10,6 +10,7 @@
     * [getArtistBands](#getartistbands)
     * [getArtistBiography](#getartistbiography)
     * [getArtistEvents](#getartistevents)
+    * [getArtistHarmonia](#getartistharmonia)
     * [getArtistMembers](#getartistmembers)
     * [getArtistRelated](#getartistrelated)
     * [getArtistReleases](#getartistreleases)
@@ -25,6 +26,7 @@
     * [getLabel](#getlabel)
     * [getLabelArtists](#getlabelartists)
     * [getLabelBiography](#getlabelbiography)
+    * [getLabelHarmonia](#getlabelharmonia)
     * [getLabelReleases](#getlabelreleases)
     * [getLabelSimilar](#getlabelsimilar)
     * [getLabelWebsites](#getlabelwebsites)
@@ -35,6 +37,7 @@
     * [getRadioTag](#getradiotag)
     * [getRelease](#getrelease)
     * [getReleaseSources](#getreleasesources)
+    * [search](#search)
     * [searchArtist](#searchartist)
     * [searchLabel](#searchlabel)
     * [searchRelease](#searchrelease)
@@ -252,6 +255,30 @@ You can paginate by setting $start and $limit parameters.
 | `$uuid` | **string** | Blitzr uuid of the artist |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
+
+
+
+
+---
+
+
+### getArtistHarmonia
+
+Get artist's harmonia.
+
+```php
+BlitzrClient::getArtistHarmonia( string $slug = null, string $uuid = null ): object
+```
+
+Get the identifiers of this artist in other databases.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$slug` | **string** | Blitzr slug of the artist |
+| `$uuid` | **string** | Blitzr uuid of the artist |
 
 
 
@@ -678,6 +705,30 @@ You can customize the response by the parameters $html_format and $url_scheme
 ---
 
 
+### getLabelHarmonia
+
+Get label's harmonia.
+
+```php
+BlitzrClient::getLabelHarmonia( string $slug = null, string $uuid = null ): object
+```
+
+Get the identifiers of this label in other databases.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$slug` | **string** | Blitzr slug of the label |
+| `$uuid` | **string** | Blitzr uuid of the label |
+
+
+
+
+---
+
+
 ### getLabelReleases
 
 Get label's releases.
@@ -925,6 +976,37 @@ Get all release's sources. At least one of the $slug or $uuid parameters is mand
 |-----------|------|-------------|
 | `$slug` | **string** | Blitzr slug of the release |
 | `$uuid` | **string** | Blitzr uuid of the release |
+
+
+
+
+---
+
+
+### search
+
+Search in multiple types.
+
+```php
+BlitzrClient::search( string $query = null, array&lt;mixed,string&gt; $type = array(), boolean $autocomplete = false, integer $start = null, integer $limit = null,  $extras = false ): object
+```
+
+Search in multiple types.
+Use $query parameter to search the entity.
+The $autocomplete parameter allow you to find entity with predictive algorithm.
+You can paginate by setting $start and $limit parameters.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** | Search query |
+| `$type` | **array<mixed,string>** | Set requested types. Available types : artist, label, release, track |
+| `$autocomplete` | **boolean** | Enable predictive search |
+| `$start` | **integer** | Start from this parameter value, for pagination |
+| `$limit` | **integer** | Limit the number of results, for pagination |
+| `$extras` | **** |  |
 
 
 

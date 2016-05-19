@@ -865,7 +865,6 @@ class BlitzrClient
     *
     * @param string $query Search query
     * @param string[] $type Set requested types. Available types : artist, label, release, track
-    * @param string[] $filters Filter results. Available filters : location, tag, type
     * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
