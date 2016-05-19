@@ -316,15 +316,20 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getArtistSimilar($slug = null, $uuid = null, $filters = null, $start = null, $limit = null)
+    public function getArtistSimilar($slug = null, $uuid = null, $filters = [], $start = null, $limit = null)
     {
-        return $this->request('artist/similars/', [
+        $params = [
             'slug'    => $slug,
             'uuid'    => $uuid,
-            'filters' => $filters,
             'start'   => $start,
             'limit'   => $limit
-        ]);
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('artist/similars/', $params);
     }
 
     /**
@@ -634,15 +639,20 @@ class BlitzrClient
     *
     * @return array
     */
-    public function getLabelSimilar($slug = null, $uuid = null, $filters = null, $start = null, $limit = null)
+    public function getLabelSimilar($slug = null, $uuid = null, $filters = [], $start = null, $limit = null)
     {
-        return $this->request('label/similars/', [
+        $params = [
             'slug'    => $slug,
             'uuid'    => $uuid,
-            'filters' => $filters,
             'start'   => $start,
             'limit'   => $limit
-        ]);
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('label/similars/', $params);
     }
 
     /**
@@ -828,14 +838,19 @@ class BlitzrClient
     */
     public function searchArtist($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
-        return $this->request('search/artist/', [
+        $params = [
             'query'         => $query,
-            'filters'       => implode(',', $filters),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
             'extras'        => $extras ? 'true' : 'false'
-        ]);
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('search/artist/', $params);
     }
 
     /**
@@ -857,14 +872,19 @@ class BlitzrClient
     */
     public function searchLabel($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
-        return $this->request('search/label/', [
+        $params = [
             'query'         => $query,
-            'filters'       => implode(',', $filters),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
             'extras'        => $extras ? 'true' : 'false'
-        ]);
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('search/label/', $params);
     }
 
     /**
@@ -887,14 +907,19 @@ class BlitzrClient
     */
     public function searchRelease($query = null, $filters = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
-        return $this->request('search/release/', [
+        $params = [
             'query'         => $query,
-            'filters'       => implode(',', $filters),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
             'start'         => $start,
             'limit'         => $limit,
             'extras'        => $extras ? 'true' : 'false'
-        ]);
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('search/release/', $params);
     }
 
     /**
@@ -916,64 +941,18 @@ class BlitzrClient
     */
     public function searchTrack($query = null, $filters = [], $start = null, $limit = null, $extras = false)
     {
-        return $this->request('search/track/', [
+        $params = [
             'query'         => $query,
-            'filters'       => implode(',', $filters),
             'start'         => $start,
             'limit'         => $limit,
             'extras'        => $extras ? 'true' : 'false'
-        ]);
-    }
+        ];
 
-    /**
-    * Search City.
-    *
-    * Search city.
-    * Use $query parameter to search the city.
-    * The $autocomplete parameter allow you to find city with predictive algorithm.
-    * You can paginate by setting $start and $limit parameters.
-    *
-    * @param string $query Search query
-    * @param boolean $autocomplete Enable predictive search
-    * @param float $latitude Geolocation of the city : latitude
-    * @param float $longitude Geolocation of the city : longitude
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return object
-    */
-    public function searchCity($query = null, $autocomplete = false, $latitude = null, $longitude = null, $start = null, $limit = null)
-    {
-        return $this->request('search/city/', [
-            'query'         => $query,
-            'autocomplete'  => $autocomplete ? 'true' : 'false',
-            'latitude'      => $latitude,
-            'longitude'     => $longitude,
-            'start'         => $start,
-            'limit'         => $limit,
-        ]);
-    }
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
 
-    /**
-    * Search Country.
-    *
-    * Search country.
-    * Use $query parameter to search the country.
-    * You can paginate by setting $start and $limit parameters.
-    *
-    * @param string $country_code Official country country code
-    * @param int $start Start from this parameter value, for pagination
-    * @param int $limit Limit the number of results, for pagination
-    *
-    * @return object
-    */
-    public function searchCountry($country_code = null, $start = null, $limit = null)
-    {
-        return $this->request('search/country/', [
-            'country_code'  => $country_code,
-            'start'         => $start,
-            'limit'         => $limit,
-        ]);
+        return $this->request('search/track/', $params);
     }
 
     /***************************
