@@ -223,6 +223,24 @@ class BlitzrClient
     }
 
     /**
+    * Get artist's harmonia.
+    *
+    * Get the identifiers of this artist in other databases.
+    *
+    * @param string $slug Blitzr slug of the artist
+    * @param string $uuid Blitzr uuid of the artist
+    *
+    * @return object
+    */
+    public function getArtistHarmonia($slug = null, $uuid = null)
+    {
+        return $this->request('artist/harmonia/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid
+        ]);
+    }
+
+    /**
     * Get group's members.
     *
     * Get the members of a group. At least one of the $slug or $uuid parameters is mandatory.
@@ -599,6 +617,24 @@ class BlitzrClient
     }
 
     /**
+    * Get label's harmonia.
+    *
+    * Get the identifiers of this label in other databases.
+    *
+    * @param string $slug Blitzr slug of the label
+    * @param string $uuid Blitzr uuid of the label
+    *
+    * @return object
+    */
+    public function getLabelHarmonia($slug = null, $uuid = null)
+    {
+        return $this->request('label/harmonia/', [
+            'slug'  => $slug,
+            'uuid'  => $uuid
+        ]);
+    }
+
+    /**
     * Get label's releases.
     *
     * Get the releases of a label.
@@ -818,6 +854,36 @@ class BlitzrClient
     /***************************
     **       Search API       **
     ***************************/
+
+    /**
+    * Search in multiple types.
+    *
+    * Search in multiple types.
+    * Use $query parameter to search the entity.
+    * The $autocomplete parameter allow you to find entity with predictive algorithm.
+    * You can paginate by setting $start and $limit parameters.
+    *
+    * @param string $query Search query
+    * @param string[] $type Set requested types. Available types : artist, label, release, track
+    * @param string[] $filters Filter results. Available filters : location, tag, type
+    * @param boolean $autocomplete Enable predictive search
+    * @param int $start Start from this parameter value, for pagination
+    * @param int $limit Limit the number of results, for pagination
+    * @param boolean extras Get extra info like number of results
+    *
+    * @return object
+    */
+    public function search($query = null, $type = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
+    {
+        return $this->request('search/', [
+            'query'         => $query,
+            'type'          => implode(',', $type),
+            'autocomplete'  => $autocomplete ? 'true' : 'false',
+            'start'         => $start,
+            'limit'         => $limit,
+            'extras'        => $extras ? 'true' : 'false'
+        ]);
+    }
 
     /**
     * Search Artist.
