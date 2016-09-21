@@ -409,43 +409,35 @@ class BlitzrClient
     }
 
     /**
-    * Get events.
+    * Search Event.
     *
-    * Get events list.
-    * Use $country_code to filter by country.
-    * Use both dates params to filter by date.
-    * Use $longitude, $latitude and $radius params to filter by geolocation.
+    * Search Event.
+    * Use $query parameter to search the Event.
     * You can paginate by setting $start and $limit parameters.
     *
-    * @param string $country_code Country code where the event take place
-    * @param float $latitude Latitude of a point
-    * @param float $longitude Longitude of a point
-    * @param string $city City code where the event take place (not compatible with $county_code)
-    * @param string $venue Venue code where the event take place
-    * @param string $tag Filter events by tag
-    * @param \DateTime $date_start DateTime object for when start the search
-    * @param \DateTime $date_end DateTime object for when end the search
-    * @param int $radius Max distance in km from the lat,lon point
+    * @param string $query Search query
+    * @param string[] $filters Filter results. Available filters : artist, country_code, city, venue, date_start, date_end, latitude, longitude, radius
+    * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
+    * @param boolean extras Get extra info like number of results
     *
-    * @return array
+    * @return object
     */
-    public function getEvents($country_code = null, $latitude = false, $longitude = false, $city = null, $venue = null, $tag = null, $date_start = null, $date_end = null, $radius = null, $start = null, $limit = null)
+    public function searchEvent($query = null, $filters = [], $start = null, $limit = null, $extras = false)
     {
-        return $this->request('events/', [
-            'country_code'  => $country_code,
-            'latitude'      => $latitude ? $latitude : 'false',
-            'longitude'     => $longitude ? $longitude : 'false',
-            'city'          => $city,
-            'venue'         => $venue,
-            'tag'           => $tag,
-            'date_start'    => $date_start ? $date_start->format(\DateTime::ISO8601) : null,
-            'date_end'      => $date_end ? $date_end->format(\DateTime::ISO8601) : null,
-            'raduis'        => $radius,
+        $params = [
+            'query'         => $query,
             'start'         => $start,
-            'limit'         => $limit
-        ]);
+            'limit'         => $limit,
+            'extras'        => $extras ? 'true' : 'false'
+        ];
+
+        foreach ($filters as $key => $value) {
+            $params['filters[' . $key . ']'] = $value;
+        }
+
+        return $this->request('search/event/', $params);
     }
 
     /***************************
@@ -577,7 +569,7 @@ class BlitzrClient
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     * @param string $order Order results by name or date of last release (must be 'name' or 'releaseDate'
-    *        default is date) 
+    *        default is date)
     *
     * @return array
     */
