@@ -417,7 +417,6 @@ class BlitzrClient
     *
     * @param string $query Search query
     * @param string[] $filters Filter results. Available filters : artist, country_code, city, venue, date_start, date_end, latitude, longitude, radius
-    * @param boolean $autocomplete Enable predictive search
     * @param int $start Start from this parameter value, for pagination
     * @param int $limit Limit the number of results, for pagination
     * @param boolean extras Get extra info like number of results

@@ -18,7 +18,7 @@
     * [getArtistSummary](#getartistsummary)
     * [getArtistWebsites](#getartistwebsites)
     * [getEvent](#getevent)
-    * [getEvents](#getevents)
+    * [searchEvent](#searchevent)
     * [getHarmoniaArtist](#getharmoniaartist)
     * [getHarmoniaRelease](#getharmoniarelease)
     * [getHarmoniaLabel](#getharmonialabel)
@@ -475,18 +475,16 @@ Get an event by slug or uuid. At least one of the $slug or $uuid parameters is m
 ---
 
 
-### getEvents
+### searchEvent
 
-Get events.
+Search Event.
 
 ```php
-BlitzrClient::getEvents( string $country_code = null, float $latitude = false, float $longitude = false, string $city = null, string $venue = null, string $tag = null, \DateTime $date_start = null, \DateTime $date_end = null, integer $radius = null, integer $start = null, integer $limit = null ): array
+BlitzrClient::searchEvent( string $query = null, array&lt;mixed,string&gt; $filters = array(), integer $start = null, integer $limit = null,  $extras = false ): object
 ```
 
-Get events list.
-Use $country_code to filter by country.
-Use both dates params to filter by date.
-Use $longitude, $latitude and $radius params to filter by geolocation.
+Search Event.
+Use $query parameter to search the Event.
 You can paginate by setting $start and $limit parameters.
 
 
@@ -494,17 +492,11 @@ You can paginate by setting $start and $limit parameters.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$country_code` | **string** | Country code where the event take place |
-| `$latitude` | **float** | Latitude of a point |
-| `$longitude` | **float** | Longitude of a point |
-| `$city` | **string** | City code where the event take place (not compatible with $county_code) |
-| `$venue` | **string** | Venue code where the event take place |
-| `$tag` | **string** | Filter events by tag |
-| `$date_start` | **\DateTime** | DateTime object for when start the search |
-| `$date_end` | **\DateTime** | DateTime object for when end the search |
-| `$radius` | **integer** | Max distance in km from the lat,lon point |
+| `$query` | **string** | Search query |
+| `$filters` | **array<mixed,string>** | Filter results. Available filters : artist, country_code, city, venue, date_start, date_end, latitude, longitude, radius |
 | `$start` | **integer** | Start from this parameter value, for pagination |
 | `$limit` | **integer** | Limit the number of results, for pagination |
+| `$extras` | **** |  |
 
 
 
@@ -1574,4 +1566,4 @@ Return readable exception string
 
 
 --------
-> This document was automatically generated from source code comments on 2016-05-19 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2016-09-30 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
