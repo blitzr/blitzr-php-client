@@ -9,6 +9,7 @@ php:
 before_script:
   - composer install
   - pear install PHP_CodeSniffer
+  - phpenv rehash
 
 script:
   - phpcs --extensions=php --standard=PSR2 src
