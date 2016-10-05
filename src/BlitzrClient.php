@@ -69,7 +69,7 @@ class BlitzrClient
      *
      * @return object|array|null
      */
-    public function request($method, $params = [])
+    protected function request($method, $params = [])
     {
         $params['key'] = $this->apiKey;
 

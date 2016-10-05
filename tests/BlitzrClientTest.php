@@ -1,13 +1,13 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-
 use Blitzr\BlitzrClient;
 
 use Blitzr\Exception\ConfigurationException;
 
-class BlitzrClientTest extends TestCase
+class BlitzrClientTest extends \PHPUnit_Framework_TestCase
 {
+
+    const API_KEY = 'API_KEY';
 
     public function testInitWithNullKey()
     {
