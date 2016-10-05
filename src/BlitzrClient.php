@@ -38,7 +38,7 @@ class BlitzrClient
     */
     private $client;
 
-    const API_BASE_URL = 'https://api.blitzr.com/';
+    const API_BASE_URL = 'https://api.blitzr.com';
 
     /**
     * BlitzrClient constructor.
@@ -124,7 +124,7 @@ class BlitzrClient
     */
     public function getArtist($slug = null, $uuid = null, $extras = [], $extras_limit = null)
     {
-        return $this->request('artist/', [
+        return $this->request('/artist/', [
             'slug'          => $slug,
             'uuid'          => $uuid,
             'extras'        => implode(',', $extras),
@@ -144,7 +144,7 @@ class BlitzrClient
     */
     public function getArtistAliases($slug = null, $uuid = null)
     {
-        return $this->request('artist/aliases/', [
+        return $this->request('/artist/aliases/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -165,7 +165,7 @@ class BlitzrClient
     */
     public function getArtistBands($slug = null, $uuid = null, $start = null, $limit = null)
     {
-        return $this->request('artist/aliases/', [
+        return $this->request('/artist/aliases/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
@@ -190,7 +190,7 @@ class BlitzrClient
     */
     public function getArtistBiography($slug = null, $uuid = null, $lang = null, $html_format = false, $url_scheme = null)
     {
-        return $this->request('artist/biography/', [
+        return $this->request('/artist/biography/', [
             'slug'          => $slug,
             'uuid'          => $uuid,
             'lang'          => $lang,
@@ -214,7 +214,7 @@ class BlitzrClient
     */
     public function getArtistEvents($slug = null, $uuid = null, $start = null, $limit = null)
     {
-        return $this->request('artist/events/', [
+        return $this->request('/artist/events/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
@@ -234,7 +234,7 @@ class BlitzrClient
     */
     public function getArtistHarmonia($slug = null, $uuid = null)
     {
-        return $this->request('artist/harmonia/', [
+        return $this->request('/artist/harmonia/', [
             'slug'  => $slug,
             'uuid'  => $uuid
         ]);
@@ -255,7 +255,7 @@ class BlitzrClient
     */
     public function getArtistMembers($slug = null, $uuid = null, $start = null, $limit = null)
     {
-        return $this->request('artist/members/', [
+        return $this->request('/artist/members/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
@@ -279,7 +279,7 @@ class BlitzrClient
     */
     public function getArtistRelated($slug = null, $uuid = null, $start = null, $limit = null)
     {
-        return $this->request('artist/related/', [
+        return $this->request('/artist/related/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
@@ -308,7 +308,7 @@ class BlitzrClient
     */
     public function getArtistReleases($slug = null, $uuid = null, $start = null, $limit = null, $type = null, $format = null, $credited = false)
     {
-        return $this->request('artist/releases/', [
+        return $this->request('/artist/releases/', [
             'slug'      => $slug,
             'uuid'      => $uuid,
             'start'     => $start,
@@ -347,7 +347,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('artist/similars/', $params);
+        return $this->request('/artist/similars/', $params);
     }
 
     /**
@@ -362,7 +362,7 @@ class BlitzrClient
     */
     public function getArtistSummary($slug = null, $uuid = null)
     {
-        return $this->request('artist/summary/', [
+        return $this->request('/artist/summary/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -380,7 +380,7 @@ class BlitzrClient
     */
     public function getArtistWebsites($slug = null, $uuid = null)
     {
-        return $this->request('artist/websites/', [
+        return $this->request('/artist/websites/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -402,7 +402,7 @@ class BlitzrClient
     */
     public function getEvent($slug = null, $uuid = null)
     {
-        return $this->request('event/', [
+        return $this->request('/event/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -436,7 +436,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('search/event/', $params);
+        return $this->request('/search/event/', $params);
     }
 
     /***************************
@@ -456,7 +456,7 @@ class BlitzrClient
     */
     public function getHarmoniaArtist($service_name = null, $service_id = null)
     {
-        return $this->request('harmonia/artist/', [
+        return $this->request('/harmonia/artist/', [
             'service_name'  => $service_name,
             'service_id'    => $service_id
         ]);
@@ -475,7 +475,7 @@ class BlitzrClient
     */
     public function getHarmoniaRelease($service_name = null, $service_id = null)
     {
-        return $this->request('harmonia/release/', [
+        return $this->request('/harmonia/release/', [
             'service_name'  => $service_name,
             'service_id'    => $service_id
         ]);
@@ -494,7 +494,7 @@ class BlitzrClient
     */
     public function getHarmoniaLabel($service_name = null, $service_id = null)
     {
-        return $this->request('harmonia/label/', [
+        return $this->request('/harmonia/label/', [
             'service_name'  => $service_name,
             'service_id'    => $service_id
         ]);
@@ -520,7 +520,7 @@ class BlitzrClient
     */
     public function getHarmoniaSearchBySource($source_name = null, $source_id = null, $source_filters = [], $strict = false)
     {
-        return $this->request('harmonia/searchbysource/', [
+        return $this->request('/harmonia/searchbysource/', [
             'source_name'       => $source_name,
             'source_id'         => $source_id,
             'source_filters'    => implode(',', $source_filters),
@@ -549,7 +549,7 @@ class BlitzrClient
     */
     public function getLabel($slug = null, $uuid = null, $extras = [], $extras_limit = null)
     {
-        return $this->request('label/', [
+        return $this->request('/label/', [
             'slug'          => $slug,
             'uuid'          => $uuid,
             'extras'        => implode(',', $extras),
@@ -574,7 +574,7 @@ class BlitzrClient
     */
     public function getLabelArtists($slug = null, $uuid = null, $start = null, $limit = null, $order = null)
     {
-        return $this->request('label/artists/', [
+        return $this->request('/label/artists/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'start' => $start,
@@ -599,7 +599,7 @@ class BlitzrClient
     */
     public function getLabelBiography($slug = null, $uuid = null, $html_format = false, $url_scheme = null)
     {
-        return $this->request('label/biography/', [
+        return $this->request('/label/biography/', [
             'slug'          => $slug,
             'uuid'          => $uuid,
             'format'        => $html_format ? 'html' : null,
@@ -619,7 +619,7 @@ class BlitzrClient
     */
     public function getLabelHarmonia($slug = null, $uuid = null)
     {
-        return $this->request('label/harmonia/', [
+        return $this->request('/label/harmonia/', [
             'slug'  => $slug,
             'uuid'  => $uuid
         ]);
@@ -642,7 +642,7 @@ class BlitzrClient
     */
     public function getLabelReleases($slug = null, $uuid = null, $format = null, $start = null, $limit = null)
     {
-        return $this->request('label/releases/', [
+        return $this->request('/label/releases/', [
             'slug'      => $slug,
             'uuid'      => $uuid,
             'format'    => $format,
@@ -679,7 +679,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('label/similars/', $params);
+        return $this->request('/label/similars/', $params);
     }
 
     /**
@@ -694,7 +694,7 @@ class BlitzrClient
     */
     public function getLabelWebsites($slug = null, $uuid = null)
     {
-        return $this->request('label/websites/', [
+        return $this->request('/label/websites/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -717,7 +717,7 @@ class BlitzrClient
     */
     public function getRadioArtist($slug = null, $uuid = null, $limit = null)
     {
-        return $this->request('radio/artist/', [
+        return $this->request('/radio/artist/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'limit' => $limit
@@ -737,7 +737,7 @@ class BlitzrClient
     */
     public function getRadioArtistSimilar($slug = null, $uuid = null, $limit = null)
     {
-        return $this->request('radio/artist/similar/', [
+        return $this->request('/radio/artist/similar/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'limit' => $limit
@@ -757,7 +757,7 @@ class BlitzrClient
     */
     public function getRadioEvent($slug = null, $uuid = null, $limit = null)
     {
-        return $this->request('radio/event/', [
+        return $this->request('/radio/event/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'limit' => $limit
@@ -777,7 +777,7 @@ class BlitzrClient
     */
     public function getRadioLabel($slug = null, $uuid = null, $limit = null)
     {
-        return $this->request('radio/label/', [
+        return $this->request('/radio/label/', [
             'slug'  => $slug,
             'uuid'  => $uuid,
             'limit' => $limit
@@ -796,7 +796,7 @@ class BlitzrClient
     */
     public function getRadioTag($slug = null, $limit = null)
     {
-        return $this->request('radio/tag/', [
+        return $this->request('/radio/tag/', [
             'slug'  => $slug,
             'limit' => $limit
         ]);
@@ -818,7 +818,7 @@ class BlitzrClient
     */
     public function getRelease($slug = null, $uuid = null)
     {
-        return $this->request('release/', [
+        return $this->request('/release/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -836,7 +836,7 @@ class BlitzrClient
     */
     public function getReleaseSources($slug = null, $uuid = null)
     {
-        return $this->request('release/sources/', [
+        return $this->request('/release/sources/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -865,7 +865,7 @@ class BlitzrClient
     */
     public function search($query = null, $type = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
     {
-        return $this->request('search/', [
+        return $this->request('/search/', [
             'query'         => $query,
             'type'          => implode(',', $type),
             'autocomplete'  => $autocomplete ? 'true' : 'false',
@@ -906,7 +906,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('search/artist/', $params);
+        return $this->request('/search/artist/', $params);
     }
 
     /**
@@ -940,7 +940,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('search/label/', $params);
+        return $this->request('/search/label/', $params);
     }
 
     /**
@@ -975,7 +975,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('search/release/', $params);
+        return $this->request('/search/release/', $params);
     }
 
     /**
@@ -1008,7 +1008,7 @@ class BlitzrClient
             $params['filters[' . $key . ']'] = $value;
         }
 
-        return $this->request('search/track/', $params);
+        return $this->request('/search/track/', $params);
     }
 
     /***************************
@@ -1030,7 +1030,7 @@ class BlitzrClient
     */
     public function getShopArtist($product_type = null, $slug = null, $uuid = null)
     {
-        return $this->request('buy/artist/' . $product_type . '/', [
+        return $this->request('/buy/artist/' . $product_type . '/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -1051,7 +1051,7 @@ class BlitzrClient
     */
     public function getShopLabel($product_type = null, $slug = null, $uuid = null)
     {
-        return $this->request('buy/label/' . $product_type . '/', [
+        return $this->request('/buy/label/' . $product_type . '/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -1072,7 +1072,7 @@ class BlitzrClient
     */
     public function getShopRelease($product_type = null, $slug = null, $uuid = null)
     {
-        return $this->request('buy/release/' . $product_type . '/', [
+        return $this->request('/buy/release/' . $product_type . '/', [
             'slug' => $slug,
             'uuid' => $uuid
         ]);
@@ -1089,7 +1089,7 @@ class BlitzrClient
     */
     public function getShopTrack($uuid = null)
     {
-        return $this->request('buy/track/', [
+        return $this->request('/buy/track/', [
             'uuid' => $uuid
         ]);
     }
@@ -1109,7 +1109,7 @@ class BlitzrClient
     */
     public function getTag($slug = null)
     {
-        return $this->request('tag/', [
+        return $this->request('/tag/', [
             'slug' => $slug
         ]);
     }
@@ -1128,7 +1128,7 @@ class BlitzrClient
     */
     public function getTagArtists($slug = null, $start = null, $limit = null)
     {
-        return $this->request('tag/artists/', [
+        return $this->request('/tag/artists/', [
             'slug'  => $slug,
             'start' => $start,
             'limit' => $limit
@@ -1149,7 +1149,7 @@ class BlitzrClient
     */
     public function getTagReleases($slug = null, $start = null, $limit = null)
     {
-        return $this->request('tag/releases/', [
+        return $this->request('/tag/releases/', [
             'slug'  => $slug,
             'start' => $start,
             'limit' => $limit
@@ -1171,7 +1171,7 @@ class BlitzrClient
     */
     public function getTrack($uuid = null)
     {
-        return $this->request('track/', [
+        return $this->request('/track/', [
             'uuid' => $uuid
         ]);
     }
@@ -1187,7 +1187,7 @@ class BlitzrClient
     */
     public function getTrackSources($uuid = null)
     {
-        return $this->request('track/sources/', [
+        return $this->request('/track/sources/', [
             'uuid' => $uuid
         ]);
     }
