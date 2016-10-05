@@ -13,6 +13,7 @@ before_script:
 
 script:
   - phpcs -n --extensions=php --standard=PSR2 src
+  - phpunit --bootstrap vendor/autoload.php tests
 
 # notifications:
 #   email:
