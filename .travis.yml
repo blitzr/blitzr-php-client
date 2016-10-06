@@ -15,6 +15,6 @@ script:
   - phpcs -n --extensions=php --standard=PSR2 src
   - phpunit --bootstrap vendor/autoload.php tests
 
-# notifications:
-#   email:
-#     - developer@blitzr.com
+notifications:
+  email:
+    - developer@blitzr.com
