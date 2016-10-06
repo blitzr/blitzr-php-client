@@ -33,4 +33,4 @@ That's all !
 
 ## Documentation
 
-You can find the documentation [here](doc/).
+You can find the documentation [here](docs/).
