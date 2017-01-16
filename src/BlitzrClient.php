@@ -113,7 +113,7 @@ class BlitzrClient
      *
      * @param string $slug         Blitzr slug of the artist
      * @param string $uuid         Blitzr uuid of the artist
-     * @param array  $extras       Artist extras : aliases, websites, biography, last_releases, next_events, relations
+     * @param array  $extras       Artist extras : aliases, websites, relations
      * @param int    $extras_limit Limit for iterable extras : last_releases, next_events (max is 10)
      *
      * @return object
@@ -184,12 +184,14 @@ class BlitzrClient
      *
      * @return object
      */
-    public function getArtistBiography($slug = null, $uuid = null, $lang = null, $html_format = false, $url_scheme = null)
+    public function getArtistBiography($slug = null, $uuid = null, $lang = null, $html_format = false, $url_scheme = null, $source = null, $license = null)
     {
         return $this->request('/artist/biography/', [
             'slug' => $slug,
             'uuid' => $uuid,
             'lang' => $lang,
+            'license' => $license,
+            'source' => $source,
             'format' => $html_format ? 'html' : null,
             'url_scheme' => $url_scheme,
         ]);
@@ -538,7 +540,7 @@ class BlitzrClient
      *
      * @param string $slug         Blitzr slug of the label
      * @param string $uuid         Blitzr uuid of the label
-     * @param array  $extras       Label extras : biography, websites, artists, last_releases, relations
+     * @param array  $extras       Label extras : biography, websites, relations
      * @param int    $extras_limit Limit for iterable extras : last_releases, artists (max is 10)
      *
      * @return object
@@ -841,35 +843,6 @@ class BlitzrClient
     /***************************
     **       Search API       **
     ***************************/
-
-    /**
-     * Search in multiple types.
-     *
-     * Search in multiple types.
-     * Use $query parameter to search the entity.
-     * The $autocomplete parameter allow you to find entity with predictive algorithm.
-     * You can paginate by setting $start and $limit parameters.
-     *
-     * @param string   $query        Search query
-     * @param string[] $type         Set requested types. Available types : artist, label, release, track
-     * @param bool     $autocomplete Enable predictive search
-     * @param int      $start        Start from this parameter value, for pagination
-     * @param int      $limit        Limit the number of results, for pagination
-     * @param bool extras Get extra info like number of results
-     *
-     * @return object
-     */
-    public function search($query = null, $type = [], $autocomplete = false, $start = null, $limit = null, $extras = false)
-    {
-        return $this->request('/search/', [
-            'query' => $query,
-            'type' => implode(',', $type),
-            'autocomplete' => $autocomplete ? 'true' : 'false',
-            'start' => $start,
-            'limit' => $limit,
-            'extras' => $extras ? 'true' : 'false',
-        ]);
-    }
 
     /**
      * Search Artist.
