@@ -114,17 +114,15 @@ class BlitzrClient
      * @param string $slug         Blitzr slug of the artist
      * @param string $uuid         Blitzr uuid of the artist
      * @param array  $extras       Artist extras : aliases, websites, relations
-     * @param int    $extras_limit Limit for iterable extras : last_releases, next_events (max is 10)
      *
      * @return object
      */
-    public function getArtist($slug = null, $uuid = null, $extras = [], $extras_limit = null)
+    public function getArtist($slug = null, $uuid = null, $extras = [])
     {
         return $this->request('/artist/', [
             'slug' => $slug,
             'uuid' => $uuid,
-            'extras' => implode(',', $extras),
-            'extras_limit' => $extras_limit,
+            'extras' => implode(',', $extras)
         ]);
     }
 
@@ -179,10 +177,12 @@ class BlitzrClient
      * @param string $slug        Blitzr slug of the artist
      * @param string $uuid        Blitzr uuid of the artist
      * @param string $lang        Language by country code (en|fr|...)
-     * @param bool   $html_format Retreive the biography with html markup
+     * @param bool   $html_format Retrieve the biography with html markup
      * @param string $url_scheme  Customize the url scheme in the biography
+     * @param string $license     License (cc0|cc-by-sa)
+     * @param string $source     License (discogs|wikipedia)
      *
-     * @return object
+     * @return array
      */
     public function getArtistBiography($slug = null, $uuid = null, $lang = null, $html_format = false, $url_scheme = null, $source = null, $license = null)
     {
@@ -541,17 +541,15 @@ class BlitzrClient
      * @param string $slug         Blitzr slug of the label
      * @param string $uuid         Blitzr uuid of the label
      * @param array  $extras       Label extras : biography, websites, relations
-     * @param int    $extras_limit Limit for iterable extras : last_releases, artists (max is 10)
      *
      * @return object
      */
-    public function getLabel($slug = null, $uuid = null, $extras = [], $extras_limit = null)
+    public function getLabel($slug = null, $uuid = null, $extras = [])
     {
         return $this->request('/label/', [
             'slug' => $slug,
             'uuid' => $uuid,
-            'extras' => implode(',', $extras),
-            'extras_limit' => $extras_limit,
+            'extras' => implode(',', $extras)
         ]);
     }
 
